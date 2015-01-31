@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.gc.materialdesign.views.Switch
+            android:id="@+id/switchView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#1E88E5"
+            materialdesign:check="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Training Mode"
+            android:id="@+id/textView18"
+            android:layout_gravity="center_vertical" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="If you enable the training mode your can challenge yourself and try to manage the route in less time then the initial creator of the."
+        android:id="@+id/textView19" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose the time fraction:"
+        android:id="@+id/textView20" />
+
+    <com.gc.materialdesign.views.Slider
+        android:id="@+id/slider"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#1E88E5"
+        materialdesign:max="100"
+        materialdesign:min="25"
+        materialdesign:showNumberIndicator="true"/>
+
+</LinearLayout>

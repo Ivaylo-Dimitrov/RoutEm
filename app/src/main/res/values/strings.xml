@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RoutEm</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="record_preconditions">- Make sure that your glass is connected to this phone \n-Ensure that you are on the starting point of the route \n- While recoding you can \'pause\', \'stop\', \'add comment\', \'take a picture\', \'abort\' and \'finish\' directly on the google glass</string>
+
+    <string-array name="radius_array">
+        <item>1 km</item>
+        <item>5 km</item>
+        <item>15 km</item>
+        <item>50 km</item>
+        <item>100 km</item>
+    </string-array>
+
+    <string-array name="distance_start_array">
+        <item>any</item>
+        <item>500 m</item>
+        <item>1 km</item>
+        <item>5 km</item>
+        <item>10 km</item>
+        <item>25 km</item>
+    </string-array>
+
+    <string-array name="distance_end_array">
+        <item>any</item>
+        <item>500 m</item>
+        <item>1 km</item>
+        <item>5 km</item>
+        <item>10 km</item>
+        <item>25 km</item>
+        <item>50 km</item>
+    </string-array>
+
+    <string-array name="duration_start_array">
+        <item>any</item>
+        <item>15 min</item>
+        <item>30 min</item>
+        <item>1 h</item>
+        <item>1 h 30 min</item>
+        <item>2 h</item>
+        <item>3 h</item>
+    </string-array>
+
+    <string-array name="duration_end_array">
+        <item>any</item>
+        <item>15 min</item>
+        <item>30 min</item>
+        <item>1 h</item>
+        <item>1 h 30 min</item>
+        <item>2 h</item>
+        <item>3 h</item>
+        <item>5 h</item>
+    </string-array>
+
+    <string-array name="difficulty_array">
+        <item>any</item>
+        <item>Novice</item>
+        <item>Experienced</item>
+        <item>Pro</item>
+        <item>Godlike</item>
+    </string-array>
+
+</resources>

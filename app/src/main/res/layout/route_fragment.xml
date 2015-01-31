@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto">
+
+
+    <fragment
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mapview"
+        class="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_above="@+id/linearLayout5"
+        map:cameraBearing="112.5"
+        map:cameraTargetLat="48.306447"
+        map:cameraTargetLng="11.90755"
+        map:cameraTilt="30"
+        map:cameraZoom="13"
+        map:mapType="normal"
+        map:uiCompass="false"
+        map:uiRotateGestures="true"
+        map:uiScrollGestures="true"
+        map:uiTiltGestures="true"
+        map:uiZoomControls="false"
+        map:uiZoomGestures="true"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout5"
+        android:background="#ffffffff">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/linearLayout4"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Distance"
+                    android:id="@+id/textView12"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="4.8 km"
+                    android:id="@+id/textView15"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/textView13"
+                    android:layout_toEndOf="@+id/textView13"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearLayout3"
+                android:layout_below="@+id/linearLayout4"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Duration"
+                    android:id="@+id/textView13"
+                    android:layout_below="@+id/textView12"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="2 h 15 min"
+                    android:id="@+id/textView16"
+                    android:layout_below="@+id/textView12"
+                    android:layout_toRightOf="@+id/textView12"
+                    android:layout_toEndOf="@+id/textView12"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linearLayout3"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/linearLayout6">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Difficulty"
+                    android:id="@+id/textView14"
+                    android:layout_below="@+id/textView13"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="For experienced users"
+                    android:id="@+id/textView17"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_below="@+id/textView13"
+                    android:layout_toRightOf="@+id/textView13"
+                    android:layout_toEndOf="@+id/textView13"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <!--<com.gc.materialdesign.views.ButtonRectangle
+            android:id="@+id/button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#1E88E5"
+            android:text="NAVIGATE" />-->
+    </LinearLayout>
+
+    <com.gc.materialdesign.views.ButtonFloat
+        android:id="@+id/buttonFloat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#009688"
+        materialdesign:animate="true"
+        materialdesign:iconDrawable="@drawable/ic_navigation_wht"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="41dp"
+        android:layout_alignTop="@+id/linearLayout5"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>
