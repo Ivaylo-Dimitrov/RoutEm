@@ -11,8 +11,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
+import automotive.tum.de.routem.models.Route;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
@@ -20,38 +27,40 @@ import it.neokree.materialtabs.MaterialTabListener;
 /**
  * Created by Ch0PPeR on 18.01.2015.
  */
-public class DetailActivity extends ActionBarActivity  implements MaterialTabListener {
+public class DetailActivity extends ActionBarActivity implements MaterialTabListener {
     static ActionBarActivity detailActivity;
     static RouteFragment routeFragment;
 
 
-    static Handler handler = new Handler(new Handler.Callback(){
+    MaterialTabHost tabHost;
+    ViewPager pager;
+    ViewPagerAdapter adapter;
+    static Route route;
+
+    static Handler handler = new Handler(new Handler.Callback() {
 
         @Override
         public boolean handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case 1:
-                    SupportMapFragment mapFragment = (SupportMapFragment) detailActivity.getSupportFragmentManager().findFragmentById(R.id.mapview);
+                    SupportMapFragment mapFragment = (SupportMapFragment) detailActivity.getSupportFragmentManager().findFragmentById(R.id.mapview_fragment);
                     mapFragment.getMapAsync(routeFragment);
                     return true;
             }
             return false;
         }
     });
-    
 
-    MaterialTabHost tabHost;
-    ViewPager pager;
-    ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.detail_view);
 
-        detailActivity =this;
+        detailActivity = this;
         tabHost = (MaterialTabHost) this.findViewById(R.id.tabHost);
-        pager = (ViewPager) this.findViewById(R.id.pager );
+        pager = (ViewPager) this.findViewById(R.id.pager);
 
         // init view pager
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -65,12 +74,11 @@ public class DetailActivity extends ActionBarActivity  implements MaterialTabLis
             }
         });
 
-
-            tabHost.addTab(
-                    tabHost.newTab()
-                            .setText("Route")
-                            .setTabListener(this)
-            );
+        tabHost.addTab(
+                tabHost.newTab()
+                        .setText("Route")
+                        .setTabListener(this)
+        );
         tabHost.addTab(
                 tabHost.newTab()
                         .setText("Ratings")
@@ -81,6 +89,7 @@ public class DetailActivity extends ActionBarActivity  implements MaterialTabLis
                         .setText("Images")
                         .setTabListener(this)
         );
+
     }
 
 
@@ -130,10 +139,10 @@ public class DetailActivity extends ActionBarActivity  implements MaterialTabLis
         }
 
         public Fragment getItem(int num) {
-            switch (num){
+            switch (num) {
                 case 0:
-                    if(routeFragment==null)
-                        routeFragment =  new RouteFragment();
+                    if (routeFragment == null)
+                        routeFragment = new RouteFragment();
                     return routeFragment;
                 case 1:
                     return new Ratings();
@@ -155,4 +164,5 @@ public class DetailActivity extends ActionBarActivity  implements MaterialTabLis
         }
 
     }
+
 }

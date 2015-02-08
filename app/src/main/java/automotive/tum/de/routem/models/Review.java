@@ -3,15 +3,15 @@ package automotive.tum.de.routem.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Ch0PPeR on 20.01.2015.
+ * Created by H1GHWAvE on 2/8/15.
  */
-public class Comment {
+public class Review {
     @SerializedName("class")
     String clazz;
     int id;
-    Coordinate coordinate;
-    String pic;
+    float rating;
     String text;
+    String title;
 
     public String getClazz() {
         return clazz;
@@ -29,20 +29,12 @@ public class Comment {
         this.id = id;
     }
 
-    public Coordinate getCoordinate() {
-        return coordinate;
+    public float getRating() {
+        return rating;
     }
 
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-    }
-
-    public String getPic() {
-        return pic;
-    }
-
-    public void setPic(String pic) {
-        this.pic = pic;
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 
     public String getText() {
@@ -51,5 +43,13 @@ public class Comment {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

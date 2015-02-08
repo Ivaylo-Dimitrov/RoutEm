@@ -8,8 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
+import automotive.tum.de.routem.models.Activities;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+
+public class MainActivity extends ActionBarActivity {
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +25,54 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         ImageButton btSkiTour = (ImageButton) findViewById(R.id.bt_ski_tour);
         ImageButton btSki = (ImageButton) findViewById(R.id.bt_skiing);
 
-        btRun.setOnClickListener(this);
-        btClimb.setOnClickListener(this);
-        btWalk.setOnClickListener(this);
-        btBike.setOnClickListener(this);
-        btSkiTour.setOnClickListener(this);
-        btSki.setOnClickListener(this);
+        btRun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, SearchActivity.class);
+                intent.putExtra("class", Activities.running);
+                startActivity(intent);
+            }
+        });
+        btClimb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, SearchActivity.class);
+                intent.putExtra("class", Activities.climbing);
+                startActivity(intent);
+            }
+        });
+        btWalk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, SearchActivity.class);
+                intent.putExtra("class", Activities.walking);
+                startActivity(intent);
+            }
+        });
+        btBike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, SearchActivity.class);
+                intent.putExtra("class", Activities.biking);
+                startActivity(intent);
+            }
+        });
+        btSkiTour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, SearchActivity.class);
+                intent.putExtra("class", Activities.skitour);
+                startActivity(intent);
+            }
+        });
+        btSki.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(MainActivity.this, SearchActivity.class);
+                intent.putExtra("class", Activities.skiing);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -54,10 +99,5 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onClick(View v) {
-        startActivity(new Intent(this,SearchActivity.class ));
     }
 }
