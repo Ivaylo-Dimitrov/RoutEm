@@ -10,6 +10,12 @@ public class Activities {
     public static int biking = 4;
     public static int skiing = 5;
     public static int skitour = 6;
+    public static String runningString = "running";
+    public static String climbingString = "climbing";
+    public static String walkingString = "walking";
+    public static String bikingString = "bicycling";
+    public static String skiingString = "skiing";
+    public static String skitourString = "touring";
     public static String runningLabel = "Running";
     public static String climbingLabel ="Climbing";
     public static String walkingLabel ="Walking";

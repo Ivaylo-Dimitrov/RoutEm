@@ -24,7 +24,7 @@ import automotive.tum.de.routem.rest.RestClient;
 /**
  * Created by Ch0PPeR on 18.01.2015.
  */
-public class SearchActivity extends ActionBarActivity{
+public class SearchActivity extends ActionBarActivity {
     Intent intent;
     int activity;
     String activityString;
@@ -33,27 +33,39 @@ public class SearchActivity extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
         intent = getIntent();
         activity = intent.getIntExtra("class", 1);
+        ArrayList<Route> routesList = new ArrayList<>();
 
         switch (activity) {
             case 1:
                 getSupportActionBar().setTitle(Activities.runningLabel);
+                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "running");
                 break;
             case 2:
                 getSupportActionBar().setTitle(Activities.climbingLabel);
+                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "climbing");
                 break;
             case 3:
                 getSupportActionBar().setTitle(Activities.walkingLabel);
+                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "walking");
                 break;
             case 4:
                 getSupportActionBar().setTitle(Activities.bikingLabel);
+                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "bicycling");
                 break;
             case 5:
                 getSupportActionBar().setTitle(Activities.skiingLabel);
+                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "skiing");
                 break;
             case 6:
                 getSupportActionBar().setTitle(Activities.skitourLabel);
+                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "touring");
                 break;
             default:
                 getSupportActionBar().setTitle(Activities.runningLabel);
@@ -61,12 +73,6 @@ public class SearchActivity extends ActionBarActivity{
         }
 
         setContentView(R.layout.choose);
-
-        if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-        ArrayList<Route> routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "running");
 
         Log.e("ASD", String.valueOf(routesList.size()));
         List<Route> routeList = new ArrayList<>();
@@ -80,13 +86,11 @@ public class SearchActivity extends ActionBarActivity{
         FloatingLabelEditText tvWhere = (FloatingLabelEditText) findViewById(R.id.editText);
         tvWhere.clearFocus();
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position,
-                                    long arg3)
-            {
-                Route route = (Route)adapter.getItemAtPosition(position);
+                                    long arg3) {
+                Route route = (Route) adapter.getItemAtPosition(position);
                 // assuming string and if you want to get the value on click of list item
                 // do what you intend to do on click of listview row
                 Log.e("ASD", new Gson().toJson(route, Route.class));

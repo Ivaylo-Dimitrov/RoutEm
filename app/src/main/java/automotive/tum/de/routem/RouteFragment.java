@@ -119,8 +119,8 @@ public class RouteFragment extends Fragment implements OnMapReadyCallback {
                     .color(Color.RED));
         }
 
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(coordiantes.get(coordiantes.size()).getLatitude(), coordiantes.get(coordiantes.size()).getLongitude())).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(route.getStartLatitude(), route.getStartLongitude())).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(coordiantes.get(coordiantes.size()-1).getLatitude(), coordiantes.get(coordiantes.size()-1).getLongitude())).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(route.getStartLatitude(), route.getStartLongitude())).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
 
         ArrayList<Comment> comments = route.getComments();
