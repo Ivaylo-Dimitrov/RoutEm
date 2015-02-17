@@ -30,6 +30,7 @@ import automotive.tum.de.routem.models.Comment;
 import automotive.tum.de.routem.models.Coordinate;
 import automotive.tum.de.routem.models.Route;
 
+
 /**
  * Created by Ch0PPeR on 20.01.2015.
  */
@@ -42,6 +43,7 @@ public class RouteFragment extends Fragment implements OnMapReadyCallback {
     TextView duration;
     TextView difficulty;
     OnMapReadyCallback listener;
+    String difficultyString;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,9 +92,27 @@ public class RouteFragment extends Fragment implements OnMapReadyCallback {
     public void onStart() {
         super.onStart();
 
+        switch (route.getDifficulty()) {
+            case 0:
+                difficultyString = "any";
+                break;
+            case 1:
+                difficultyString = Route.novice;
+                break;
+            case 2:
+                difficultyString = Route.expirienced;
+                break;
+            case 3:
+                difficultyString = Route.professional;
+                break;
+            case 4:
+                difficultyString = Route.godlike;
+                break;
+        }
+
         distance.setText(String.valueOf(route.getDistance()) + "km");
         duration.setText(String.valueOf(route.getDuration()) + "h");
-        difficulty.setText(String.valueOf(route.getDifficulty()));
+        difficulty.setText(String.valueOf(difficultyString));
 
 
     }

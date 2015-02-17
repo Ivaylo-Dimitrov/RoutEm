@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.gc.materialdesign.views.ButtonFloat;
 import com.google.gson.Gson;
 import com.marvinlabs.widget.floatinglabel.edittext.FloatingLabelEditText;
 
@@ -24,24 +25,60 @@ import automotive.tum.de.routem.rest.RestClient;
 /**
  * Created by Ch0PPeR on 18.01.2015.
  */
-public class SearchActivity extends ActionBarActivity {
+public class SearchActivity extends ActionBarActivity implements View.OnClickListener{
     Intent intent;
     int activity;
     String activityString;
+    ArrayList<Route> routesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.choose);
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
 
+
         intent = getIntent();
         activity = intent.getIntExtra("class", 1);
-        ArrayList<Route> routesList = new ArrayList<>();
 
+        ButtonFloat b = (ButtonFloat) findViewById(R.id.buttonFloat);
+        b.setOnClickListener(this);
+
+        FloatingLabelEditText tvWhere = (FloatingLabelEditText) findViewById(R.id.editText);
+        tvWhere.clearFocus();
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.search_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onClick(View v) {
         switch (activity) {
             case 1:
                 getSupportActionBar().setTitle(Activities.runningLabel);
@@ -72,7 +109,7 @@ public class SearchActivity extends ActionBarActivity {
                 break;
         }
 
-        setContentView(R.layout.choose);
+
 
         Log.e("ASD", String.valueOf(routesList.size()));
         List<Route> routeList = new ArrayList<>();
@@ -83,8 +120,7 @@ public class SearchActivity extends ActionBarActivity {
         ListView lv = (ListView) findViewById(R.id.listView);
         SearchItemsAdapter sia = new SearchItemsAdapter(this, routeList);
         lv.setAdapter(sia);
-        FloatingLabelEditText tvWhere = (FloatingLabelEditText) findViewById(R.id.editText);
-        tvWhere.clearFocus();
+
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -101,29 +137,4 @@ public class SearchActivity extends ActionBarActivity {
             }
         });
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.search_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-
 }

@@ -8,6 +8,12 @@ import java.util.ArrayList;
  * Created by Ch0PPeR on 19.01.2015.
  */
 public class Route {
+
+    public final static String novice = "Novice";
+    public final static String expirienced = "Expirienced";
+    public final static String professional = "Professional";
+    public final static String godlike = "Godlike";
+
     @SerializedName("class")
     String clazz;
     int id;

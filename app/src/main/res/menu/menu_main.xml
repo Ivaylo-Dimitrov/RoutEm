@@ -6,13 +6,11 @@
         android:id="@+id/action_record"
         android:title="Record Route"
         app:showAsAction="always|withText"
-        android:icon="@drawable/ic_videocam_wht"
+        android:icon="@drawable/ic_satellite_24px"
         />
 
     <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
-        android:orderInCategory="100"
-        android:icon="@drawable/ic_settings_wht"
-        app:showAsAction="always" />
+        android:orderInCategory="100" />
 </menu>

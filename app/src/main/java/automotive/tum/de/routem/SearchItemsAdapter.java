@@ -29,6 +29,7 @@ public class SearchItemsAdapter extends ArrayAdapter {
     String ratingAverage;
     int ratingz;
     ArrayList<Review> reviews;
+    String difficultyString;
 
 
     public SearchItemsAdapter(Activity context, List<Route> list) {
@@ -44,17 +45,36 @@ public class SearchItemsAdapter extends ArrayAdapter {
         LayoutInflater inflater = mContext.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.search_item, null);
 
+        route = list.get(position);
+
         title = (TextView) rowView.findViewById(R.id.titlez);
         length = (TextView) rowView.findViewById(R.id.lengthz);
         duration = (TextView) rowView.findViewById(R.id.durationz);
         difficulty = (TextView) rowView.findViewById(R.id.difficultyz);
         rating = (TextView) rowView.findViewById(R.id.ratingz);
 
-        route = list.get(position);
+        switch (route.getDifficulty()) {
+            case 0:
+                difficultyString = "any";
+                break;
+            case 1:
+                difficultyString = Route.novice;
+                break;
+            case 2:
+                difficultyString = Route.expirienced;
+                break;
+            case 3:
+                difficultyString = Route.professional;
+                break;
+            case 4:
+                difficultyString = Route.godlike;
+                break;
+        }
+
         title.setText(route.getName());
         length.setText(String.valueOf(route.getDistance()) + "km");
         duration.setText(String.valueOf(route.getDuration()) + "h");
-        difficulty.setText(String.valueOf(route.getDifficulty()));
+        difficulty.setText(String.valueOf(difficultyString));
 
         reviews = route.getReviews();
 
