@@ -3,6 +3,7 @@ package automotive.tum.de.routem.rest;
 import java.util.ArrayList;
 
 import automotive.tum.de.routem.models.Route;
+import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -16,4 +17,7 @@ public interface RestInterface {
 
     @GET("/RouteManager/getRoutes")
     ArrayList<Route> getRoutes(@Query("lat") float lat, @Query("lon") float lon, @Query("radius") int radius, @Query("type") String type);
+
+    @GET("/RouteManager/getRoutes")
+    void getRoutesAsync(@Query("lat") float lat, @Query("lon") float lon, @Query("radius") int radius, @Query("type") String type, Callback<ArrayList<Route>> callback);
 }

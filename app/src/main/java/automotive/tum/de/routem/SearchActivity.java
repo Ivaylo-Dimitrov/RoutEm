@@ -1,6 +1,7 @@
 package automotive.tum.de.routem;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
@@ -19,8 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import automotive.tum.de.routem.models.Activities;
+import automotive.tum.de.routem.models.Comment;
+import automotive.tum.de.routem.models.Comments;
 import automotive.tum.de.routem.models.Route;
 import automotive.tum.de.routem.rest.RestClient;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * Created by Ch0PPeR on 18.01.2015.
@@ -30,6 +36,7 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
     int activity;
     String activityString;
     ArrayList<Route> routesList = new ArrayList<>();
+    ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,7 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
             StrictMode.setThreadPolicy(policy);
         }
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         intent = getIntent();
         activity = intent.getIntExtra("class", 1);
@@ -50,6 +58,27 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
 
         FloatingLabelEditText tvWhere = (FloatingLabelEditText) findViewById(R.id.editText);
         tvWhere.clearFocus();
+
+        lv = (ListView) findViewById(R.id.listView);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                    long arg3) {
+                Route route = (Route) adapter.getItemAtPosition(position);
+                // assuming string and if you want to get the value on click of list item
+                // do what you intend to do on click of listview row
+                Log.e("ASD", new Gson().toJson(route, Route.class));
+                intent = new Intent(SearchActivity.this, DetailActivity.class);
+                for(Comment c : route.getComments()){
+                    c.setPic(null);
+                }
+
+                String data = new Gson().toJson(route, Route.class);
+                intent.putExtra("route", data);
+                startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -76,65 +105,62 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
         return super.onOptionsItemSelected(item);
     }
 
-
-    @Override
-    public void onClick(View v) {
-        switch (activity) {
-            case 1:
-                getSupportActionBar().setTitle(Activities.runningLabel);
-                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "running");
-                break;
-            case 2:
-                getSupportActionBar().setTitle(Activities.climbingLabel);
-                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "climbing");
-                break;
-            case 3:
-                getSupportActionBar().setTitle(Activities.walkingLabel);
-                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "walking");
-                break;
-            case 4:
-                getSupportActionBar().setTitle(Activities.bikingLabel);
-                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "bicycling");
-                break;
-            case 5:
-                getSupportActionBar().setTitle(Activities.skiingLabel);
-                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "skiing");
-                break;
-            case 6:
-                getSupportActionBar().setTitle(Activities.skitourLabel);
-                routesList = RestClient.get().getRoutes((float) 48.122957, (float) 11.574097, 15, "touring");
-                break;
-            default:
-                getSupportActionBar().setTitle(Activities.runningLabel);
-                break;
-        }
-
-
-
+    private void parseList(List <Route> routesList){
         Log.e("ASD", String.valueOf(routesList.size()));
         List<Route> routeList = new ArrayList<>();
         for (int i = 0; i < routesList.size(); i++) {
             routeList.add(routesList.get(i));
         }
 
-        ListView lv = (ListView) findViewById(R.id.listView);
+
         SearchItemsAdapter sia = new SearchItemsAdapter(this, routeList);
         lv.setAdapter(sia);
 
 
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        String type = new String();
+        switch (activity) {
+            case 1:
+                type=  "running";
+                break;
+            case 2:
+                type=  "climbing";
+                break;
+            case 3:
+                type=  "walking";
+                break;
+            case 4:
+                type=  "bicycling";
+                break;
+            case 5:
+                type=  "skiing";
+                break;
+            case 6:
+                type=  "touring";
+                break;
+            default:
+                getSupportActionBar().setTitle(Activities.runningLabel);
+                break;
+        }
+
+        getSupportActionBar().setTitle(type.toUpperCase());
+        RestClient.get().getRoutesAsync((float) 48.122957, (float) 11.574097, 15,type, new Callback<ArrayList<Route>>() {
             @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position,
-                                    long arg3) {
-                Route route = (Route) adapter.getItemAtPosition(position);
-                // assuming string and if you want to get the value on click of list item
-                // do what you intend to do on click of listview row
-                Log.e("ASD", new Gson().toJson(route, Route.class));
-                intent = new Intent(SearchActivity.this, DetailActivity.class);
-                intent.putExtra("route", new Gson().toJson(route, Route.class));
-                startActivity(intent);
+            public void success(ArrayList<Route> routes, Response response) {
+                parseList(routes);
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
 
             }
         });
+
+
     }
 }

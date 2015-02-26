@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,8 +74,17 @@ public class SearchItemsAdapter extends ArrayAdapter {
         }
 
         title.setText(route.getName());
-        length.setText(String.valueOf(route.getDistance()) + "km");
-        duration.setText(String.valueOf(route.getDuration()) + "h");
+
+        double distance=(float)route.getDistance()/1000.0f;
+        NumberFormat formatter = new DecimalFormat("#0.00");
+
+        length.setText(formatter.format(distance) + " km");
+
+        double lengths=(float)route.getDuration()/1000.0f;
+        NumberFormat formatter2 = new DecimalFormat("#0.00");
+
+        duration.setText(formatter2.format(lengths) + " h");
+
         difficulty.setText(String.valueOf(difficultyString));
 
         reviews = route.getReviews();
@@ -88,7 +99,7 @@ public class SearchItemsAdapter extends ArrayAdapter {
 
         ratingAverage = String.valueOf(ratingz / gesamt);
 
-        rating.setText(ratingAverage + "/5.0");
+        rating.setText(ratingAverage + ".0/5.0");
 
         return rowView;
     }

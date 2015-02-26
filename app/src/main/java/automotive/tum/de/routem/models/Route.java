@@ -14,9 +14,6 @@ public class Route {
     public final static String professional = "Professional";
     public final static String godlike = "Godlike";
 
-    @SerializedName("class")
-    String clazz;
-    int id;
     ArrayList<Comment> comments;
     ArrayList<Coordinate> coordinates;
     int difficulty;
@@ -28,21 +25,6 @@ public class Route {
     float startLongitude;
     String type;
 
-    public String getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public ArrayList<Comment> getComments() {
         return comments;

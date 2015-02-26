@@ -90,6 +90,8 @@ public class DetailActivity extends ActionBarActivity implements MaterialTabList
                         .setTabListener(this)
         );
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
 

@@ -24,6 +24,8 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.gson.Gson;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import automotive.tum.de.routem.models.Comment;
@@ -110,8 +112,15 @@ public class RouteFragment extends Fragment implements OnMapReadyCallback {
                 break;
         }
 
-        distance.setText(String.valueOf(route.getDistance()) + "km");
-        duration.setText(String.valueOf(route.getDuration()) + "h");
+        double asd=(float)route.getDistance()/1000.0f;
+        NumberFormat formatter = new DecimalFormat("#0.00");
+
+        distance.setText(formatter.format(asd) + " km");
+
+        double lengths=(float)route.getDuration()/1000.0f;
+        NumberFormat formatter2 = new DecimalFormat("#0.00");
+
+        duration.setText(formatter2.format(lengths) + " h");
         difficulty.setText(String.valueOf(difficultyString));
 
 

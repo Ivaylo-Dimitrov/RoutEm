@@ -6,28 +6,9 @@ import com.google.gson.annotations.SerializedName;
  * Created by Ch0PPeR on 20.01.2015.
  */
 public class Comment {
-    @SerializedName("class")
-    String clazz;
-    int id;
     Coordinate coordinate;
-    String pic;
+    Picture pic;
     String text;
-
-    public String getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(String clazz) {
-        this.clazz = clazz;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Coordinate getCoordinate() {
         return coordinate;
@@ -37,11 +18,11 @@ public class Comment {
         this.coordinate = coordinate;
     }
 
-    public String getPic() {
+    public Picture getPic() {
         return pic;
     }
 
-    public void setPic(String pic) {
+    public void setPic(Picture pic) {
         this.pic = pic;
     }
 
