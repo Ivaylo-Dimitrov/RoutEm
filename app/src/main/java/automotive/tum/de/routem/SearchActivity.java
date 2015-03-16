@@ -1,7 +1,6 @@
 package automotive.tum.de.routem;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
@@ -21,7 +20,6 @@ import java.util.List;
 
 import automotive.tum.de.routem.models.Activities;
 import automotive.tum.de.routem.models.Comment;
-import automotive.tum.de.routem.models.Comments;
 import automotive.tum.de.routem.models.Route;
 import automotive.tum.de.routem.rest.RestClient;
 import retrofit.Callback;
@@ -31,7 +29,7 @@ import retrofit.client.Response;
 /**
  * Created by Ch0PPeR on 18.01.2015.
  */
-public class SearchActivity extends ActionBarActivity implements View.OnClickListener{
+public class SearchActivity extends ActionBarActivity implements View.OnClickListener {
     Intent intent;
     int activity;
     String activityString;
@@ -69,7 +67,7 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
                 // do what you intend to do on click of listview row
                 Log.e("ASD", new Gson().toJson(route, Route.class));
                 intent = new Intent(SearchActivity.this, DetailActivity.class);
-                for(Comment c : route.getComments()){
+                for (Comment c : route.getComments()) {
                     c.setPic(null);
                 }
 
@@ -101,11 +99,10 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    private void parseList(List <Route> routesList){
+    private void parseList(List<Route> routesList) {
         Log.e("ASD", String.valueOf(routesList.size()));
         List<Route> routeList = new ArrayList<>();
         for (int i = 0; i < routesList.size(); i++) {
@@ -117,7 +114,6 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
         lv.setAdapter(sia);
 
 
-
     }
 
     @Override
@@ -126,22 +122,22 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
         String type = new String();
         switch (activity) {
             case 1:
-                type=  "running";
+                type = "running";
                 break;
             case 2:
-                type=  "climbing";
+                type = "climbing";
                 break;
             case 3:
-                type=  "walking";
+                type = "walking";
                 break;
             case 4:
-                type=  "bicycling";
+                type = "bicycling";
                 break;
             case 5:
-                type=  "skiing";
+                type = "skiing";
                 break;
             case 6:
-                type=  "touring";
+                type = "touring";
                 break;
             default:
                 getSupportActionBar().setTitle(Activities.runningLabel);
@@ -149,7 +145,7 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
         }
 
         getSupportActionBar().setTitle(type.toUpperCase());
-        RestClient.get().getRoutesAsync((float) 48.122957, (float) 11.574097, 15,type, new Callback<ArrayList<Route>>() {
+        RestClient.get().getRoutesAsync((float) 48.122957, (float) 11.574097, 1500, type, new Callback<ArrayList<Route>>() {
             @Override
             public void success(ArrayList<Route> routes, Response response) {
                 parseList(routes);
